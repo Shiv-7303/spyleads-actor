@@ -113,18 +113,16 @@ const hashtagCrawler = new PlaywrightCrawler({
   // Intercept Instagram's internal API calls to capture post data
   preNavigationHooks: [
     async ({ page }) => {
+      // Set headers including User-Agent (Playwright uses setExtraHTTPHeaders, not setUserAgent)
       await page.setExtraHTTPHeaders({
         'Accept-Language': 'en-US,en;q=0.9',
         'Accept':
           'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-      });
-
-      // Override user agent to look like a real browser
-      await page.setUserAgent(
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ' +
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ' +
           'AppleWebKit/537.36 (KHTML, like Gecko) ' +
           'Chrome/124.0.0.0 Safari/537.36',
-      );
+      });
 
       // Intercept Instagram GraphQL / API responses
       page.on('response', async (response) => {
@@ -226,11 +224,13 @@ const profileCrawler = new PlaywrightCrawler({
 
   preNavigationHooks: [
     async ({ page }) => {
-      await page.setUserAgent(
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ' +
+      // Set User-Agent via headers (Playwright doesn't have page.setUserAgent)
+      await page.setExtraHTTPHeaders({
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ' +
           'AppleWebKit/537.36 (KHTML, like Gecko) ' +
           'Chrome/124.0.0.0 Safari/537.36',
-      );
+      });
 
       // Intercept profile API response
       page.on('response', async (response) => {
