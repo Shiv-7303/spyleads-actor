@@ -1,0 +1,16 @@
+{
+  "name": "spyleads-instagram-scraper",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "SpyLeads Instagram profile scraper actor for Apify",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node src/main.js"
+  },
+  "dependencies": {
+    "apify": "^3.2.0",
+    "crawlee": "^3.9.0",
+    "playwright": "^1.44.0"
+  }
+}

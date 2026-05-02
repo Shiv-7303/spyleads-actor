@@ -1,0 +1,9 @@
+{
+  "actorSpecification": 1,
+  "name": "spyleads-instagram-scraper",
+  "title": "SpyLeads Instagram Profile Scraper",
+  "description": "Scrapes Instagram profiles by hashtag. Returns username, followers, bio, email, category, and profile URL.",
+  "version": "1.0",
+  "input": "./input_schema.json",
+  "dockerfile": "./Dockerfile"
+}

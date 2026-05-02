@@ -1,0 +1,42 @@
+{
+  "title": "SpyLeads Instagram Scraper Input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "query": {
+      "title": "Hashtag or Keyword",
+      "type": "string",
+      "description": "Instagram hashtag to scrape (without #). Example: fitness",
+      "editor": "textfield"
+    },
+    "type": {
+      "title": "Query Type",
+      "type": "string",
+      "description": "Type of query. Currently supports: hashtag",
+      "editor": "select",
+      "enum": ["hashtag"],
+      "default": "hashtag"
+    },
+    "maxResults": {
+      "title": "Max Profiles",
+      "type": "integer",
+      "description": "Maximum number of profiles to extract. Keep under 150 for safety.",
+      "default": 50,
+      "minimum": 1,
+      "maximum": 150
+    },
+    "minFollowers": {
+      "title": "Minimum Followers",
+      "type": "integer",
+      "description": "Only include profiles with this many followers or more. 0 = no filter.",
+      "default": 0
+    },
+    "maxFollowers": {
+      "title": "Maximum Followers",
+      "type": "integer",
+      "description": "Only include profiles with this many followers or less. 0 = no filter.",
+      "default": 0
+    }
+  },
+  "required": ["query"]
+}
