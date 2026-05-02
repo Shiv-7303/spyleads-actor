@@ -82,6 +82,17 @@ console.log(`   Max       : ${maxResults}`);
 console.log(`   Followers : ${minFollowers || 'any'} – ${maxFollowers || 'any'}`);
 console.log(``);
 
+// ─────────────────────────────────────────────
+// PROXY SETUP (this is why other scrapers work!)
+// Instagram blocks datacenter IPs instantly.
+// Apify's residential proxies rotate real IPs.
+// ─────────────────────────────────────────────
+const proxyConfiguration = await Actor.createProxyConfiguration({
+  groups: ['RESIDENTIAL'],
+  countryCode: 'IN',
+});
+console.log(`   Proxy     : RESIDENTIAL (IN)`);
+
 // Collected usernames from hashtag page
 const collectedUsernames = new Set();
 
@@ -98,6 +109,7 @@ const hashtagCrawler = new PlaywrightCrawler({
   maxConcurrency: 1,
   maxRequestRetries: 2,
   requestHandlerTimeoutSecs: 90,
+  proxyConfiguration,
 
   launchContext: {
     launchOptions: {
@@ -210,6 +222,7 @@ const profileCrawler = new PlaywrightCrawler({
   maxConcurrency: 1,
   maxRequestRetries: 2,
   requestHandlerTimeoutSecs: 60,
+  proxyConfiguration,
 
   launchContext: {
     launchOptions: {
